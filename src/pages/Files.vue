@@ -16,10 +16,9 @@
     }
 
     .dragzone {
-        display: table;
+        display: block;
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
+        top: 0; left: 0; bottom: 0; right: 0;
         z-index: 9999999999;
         background-color: rgba(0, 0, 0, 0.5);
         transition: visibility 175ms, opacity 175ms;
@@ -36,10 +35,13 @@
     }
 
     .dragzone .textnode {
-        display: table-cell;
+        display: block;
         text-align: center;
-        vertical-align: middle;
         transition: font-size 175ms;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        margin-top: -0.5em;
     }
 </style>
 
@@ -215,7 +217,8 @@
                     </tr>
                 </template>
             </v-data-table>
-            <div class="dragzone" :style="'visibility: '+dropzone.visibility+'; opacity: '+dropzone.hidden">
+            <!--//-->
+            <div class="dragzone" :style="'visibility: '+dropzone.visibility+'; opacity: '+dropzone.hidden+';'">
                 <div class="textnode">{{ $t('Files.DropFilesToAddGcode')}}</div>
             </div>
         </v-card>
