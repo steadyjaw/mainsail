@@ -307,5 +307,64 @@ export const actions: ActionTree<GuiState, RootState> = {
             })
 
         }
+    },
+
+    async storeTheme({ commit, dispatch, state }, payload) {
+        payload.id = uuid()
+
+        const themes = [...state.theme.themes]
+        themes.push(payload)
+
+        await commit('storeTheme', payload)
+        dispatch('updateSettings', {
+            keyName: 'theme.themes',
+            newVal: themes
+        })
+
+        return payload.id
+    },
+
+    saveTheme({commit, dispatch, state}, payload) {
+        const themes = state.theme.themes.filter((theme: any) => payload.id !== theme.id)
+        themes.push(payload)
+        commit('storeTheme', payload)
+        dispatch('updateSettings', {
+            keyName: 'theme.themes',
+            newVal: themes
+        })
+    },
+
+    deleteTheme({commit, dispatch, state}, payload) {
+        const themes = state.theme.themes.filter((theme: any) => theme.id !== payload)
+        const activeTheme = state.theme.active
+
+        if(payload === activeTheme) {
+            commit('setActiveTheme', 'mainsail-default-theme')
+            dispatch('updateSetting', {
+                keyName: 'theme.active',
+                newVal: 'mainsail-default-theme'
+            })
+        }
+
+        commit('storeTheme', themes)
+        dispatch('updateSettings', {
+            keyName: 'theme.themes',
+            newVal: themes
+        })
+    },
+
+    async applyTheme({commit, dispatch, state}, payload) {
+        await commit('applyTheme', payload)
+        dispatch('updateSettings', {
+            keyName: 'theme.active',
+            newVal: payload
+        })
+    },
+
+    async getActiveTheme({commit}) {
+        const activeTheme = Vue.$socket.emit('server.database.get_item', { namespace: 'mainsail', key: 'theme.active' })
+        await commit('setActiveTheme', activeTheme)
+
+        return activeTheme
     }
 }

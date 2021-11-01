@@ -92,7 +92,8 @@ export default class TheSidebar extends Mixins(BaseMixin) {
     }
 
     get logoColor(): string {
-        return this.$store.state.gui.theme.logo
+        // return this.$store.state.gui.theme.logo
+        return this.$vuetify?.theme?.currentTheme?.logo?.toString() ?? '#d41216'
     }
 
     get sidebarLogo(): string {

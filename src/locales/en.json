@@ -508,6 +508,8 @@
 		"InterfaceSettings": "Interface Settings",
 		"Cancel": "Cancel",
 		"Edit": "Edit",
+		"Save": "Save",
+		"Apply": "Apply",
 		"GeneralTab": {
 			"General": "General",
 			"PrinterName": "Printer Name",
@@ -656,7 +658,14 @@
 			"Port": "Port"
 		},
 		"UiSettingsTab": {
+			"Name": "Name",
+			"ThemeNameToolTip": "Valid Characters: a-z, A-Z, 0-9, - and spaces",
+			"Description": "Description",
 			"UiSettings": "UI-Settings",
+			"Theme": "Theme",
+			"ThemeEditor": "Theme Editor",
+			"Colors": "Colors",
+			"DarkMode": "Dark Mode",
 			"Logo": "Logo",
 			"Primary": "Primary",
 			"BoolBigThumbnail": "Large thumbnail",

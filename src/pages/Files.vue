@@ -7,6 +7,10 @@
         white-space: nowrap;
     }
 
+    .v-data-table tr:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+
     .v-data-table .file-list-cursor:hover {
         cursor: pointer;
     }
@@ -63,13 +67,13 @@
                         <v-spacer></v-spacer>
                         <input type="file" ref="fileUpload" style="display: none" multiple @change="uploadFile" />
                         <v-btn @click="clickUploadButton" :title="$t('Files.UploadNewGcode')" color="primary" class="px-2 minwidth-0 ml-3" :loading="loadings.includes('gcodeUpload')"><v-icon>mdi-upload</v-icon></v-btn>
-                        <v-btn @click="createDirectory" :title="$t('Files.CreateNewDirectory')" color="grey darken-3" class="px-2 minwidth-0 ml-3"><v-icon>mdi-folder-plus</v-icon></v-btn>
-                        <v-btn @click="refreshFileList" :title="$t('Files.RefreshCurrentDirectory')" color="grey darken-3" class="px-2 minwidth-0 ml-3"><v-icon>mdi-refresh</v-icon></v-btn>
+                        <v-btn @click="createDirectory" :title="$t('Files.CreateNewDirectory')" color="accent" class="px-2 minwidth-0 ml-3"><v-icon>mdi-folder-plus</v-icon></v-btn>
+                        <v-btn @click="refreshFileList" :title="$t('Files.RefreshCurrentDirectory')" color="accent" class="px-2 minwidth-0 ml-3"><v-icon>mdi-refresh</v-icon></v-btn>
                         <v-menu :offset-y="true" :close-on-content-click="false" :title="$t('Files.SetupCurrentList')">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="px-2 minwidth-0 ml-3" color="grey darken-3" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
+                                <v-btn class="px-2 minwidth-0 ml-3" color="accent" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
                             </template>
-                            <v-list>
+                            <v-list color="panel darken-3">
                                 <v-list-item class="minHeight36">
                                     <v-checkbox class="mt-0" hide-details v-model="showHiddenFiles" :label="$t('Files.HiddenFiles')"></v-checkbox>
                                 </v-list-item>
@@ -91,7 +95,7 @@
                         <span><b>{{ $t('Files.CurrentPath') }}:</b> {{ this.currentPath !== 'gcodes' ? "/"+this.currentPath.substring(7) : "/" }}</span>
                         <v-spacer></v-spacer>
                         <template v-if="this.disk_usage !== null">
-                            <v-tooltip top>
+                            <v-tooltip top color="panel darken-3">
                                 <template v-slot:activator="{ on, attrs }">
                                     <span v-bind="attrs" v-on="on">
                                         <b>{{ $t('Files.FreeDisk') }}:</b> {{ formatFilesize(disk_usage.free) }}
@@ -110,7 +114,7 @@
             <v-divider class="mb-3"></v-divider>
             <v-data-table
                 :items="files"
-                class="files-table"
+                class="files-table panel darken-1"
                 :headers="filteredHeaders"
                 :custom-sort="sortFiles"
                 :sort-by.sync="sortBy"
@@ -165,7 +169,7 @@
                             </template>
                             <template v-else>
                                 <template v-if="getSmallThumbnail(item) && getBigThumbnail(item)">
-                                    <v-tooltip v-if="!item.isDirectory && getSmallThumbnail(item) && getBigThumbnail(item)" top content-class="tooltip__content-opacity1">
+                                    <v-tooltip color="panel" v-if="!item.isDirectory && getSmallThumbnail(item) && getBigThumbnail(item)" top content-class="tooltip__content-opacity1">
                                         <template v-slot:activator="{ on, attrs }">
                                             <vue-load-image>
                                                 <img slot="image" :src="getSmallThumbnail(item)" width="32" height="32" v-bind="attrs" v-on="on" />
@@ -239,7 +243,7 @@
             </template>
         </v-snackbar>
         <v-dialog v-model="dialogPrintFile.show" :max-width="getThumbnailWidth(dialogPrintFile.item)">
-            <v-card>
+            <v-card color="panel">
                 <v-img
                     contain
                     v-if="getBigThumbnail(dialogPrintFile.item)"

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn color="grey darken-3" class="ml-5 minwidth-0 px-2" @click="showSettings = true">
+        <v-btn color="accent" class="ml-5 minwidth-0 px-2" @click="showSettings = true">
             <v-icon>mdi-cogs</v-icon>
         </v-btn>
         <v-dialog v-model="showSettings" width="900" persistent :fullscreen="isMobile">
@@ -22,7 +22,7 @@
                 <v-row>
                     <v-col class="col-auto pr-0" v-if="!isMobile">
                         <perfect-scrollbar class="settings-tabs-bar height500" ref="settingsTabsScroll">
-                            <v-tabs v-model="activeTab" :vertical="true">
+                            <v-tabs v-model="activeTab" :vertical="true" background-color="panel">
                                 <v-tab
                                     v-for="(tab, index) of tabTitles" v-bind:key="index"
                                     :href="'#'+tab.name"

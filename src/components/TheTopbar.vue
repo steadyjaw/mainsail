@@ -6,7 +6,7 @@
 
 <template>
     <div>
-        <v-app-bar app elevate-on-scroll>
+        <v-app-bar app elevate-on-scroll color='toolbar'>
             <v-app-bar-nav-icon @click.stop="naviDrawer = !naviDrawer"></v-app-bar-nav-icon>
             <v-spacer></v-spacer>
             <the-throttled-states></the-throttled-states>

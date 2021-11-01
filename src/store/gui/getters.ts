@@ -1,6 +1,6 @@
 import {caseInsensitiveSort} from '@/plugins/helpers'
 import {GetterTree} from 'vuex'
-import {GuiState, GuiStateConsoleFilter, GuiStateMacrogroup, GuiStatePreset} from '@/store/gui/types'
+import {GuiState, GuiStateConsoleFilter, GuiStateMacrogroup, GuiStatePreset, GuiStateTheme} from '@/store/gui/types'
 
 // eslint-disable-next-line
 export const getters: GetterTree<GuiState, any> = {
@@ -134,5 +134,13 @@ export const getters: GetterTree<GuiState, any> = {
         }
 
         return panels
+    },
+
+    getTheme: (state) => (id: string) => {
+        return state.theme.themes.find((theme: GuiStateTheme) => theme.id === id)
+    },
+
+    getActiveTheme: (state) => {
+        return state.theme.active
     }
 }

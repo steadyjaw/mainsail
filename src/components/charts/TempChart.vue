@@ -38,21 +38,21 @@ export default class TempChart extends Mixins(BaseMixin) {
 
     private isVisible = true
     public chartOptions = {
-        darkMode: true,
+        darkMode: this.$vuetify.theme.dark,
         animation: false,
         tooltip: {
             animation: false,
             trigger: 'axis',
-            backgroundColor: 'rgba(0,0,0,0.9)',
+            // backgroundColor: this.$vuetify.theme.currentTheme.panel,
             borderWidth: 0,
             textStyle: {
-                color: '#fff',
+                class: 'caption',
                 fontSize: '14px'
             },
             padding: 15,
             formatter: this.tooltipFormater,
             confine: true,
-            className: 'echarts-tooltip',
+            className: 'echarts-tooltip panel',
             position: function (pos: any, params: any, dom: any, rect: any, size: any) {
                 // tooltip will be fixed on the right if mouse hovering on the left,
                 // and on the left if hovering on the right.
@@ -82,11 +82,10 @@ export default class TempChart extends Mixins(BaseMixin) {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: 'rgba(255, 255, 255, 0.06)',
+                    opacity: 0.36
                 },
             },
             axisLabel: {
-                color: 'rgba(255, 255, 255, 0.24)',
                 margin: 10,
             },
         },
@@ -105,16 +104,15 @@ export default class TempChart extends Mixins(BaseMixin) {
                 nameLocation: 'end',
                 nameGap: 5,
                 nameTextStyle: {
-                    color: 'rgba(255, 255, 255, 0.24)',
                     align: 'left',
                 },
                 splitLine: {
+                    show: true,
                     lineStyle: {
-                        color: 'rgba(255, 255, 255, 0.12)',
+                        opacity: 0.36
                     },
                 },
                 axisLabel: {
-                    color: 'rgba(255, 255, 255, 0.24)',
                     formatter: '{value}',
                     rotate: 90,
                     //showMaxLabel: false,
@@ -122,10 +120,7 @@ export default class TempChart extends Mixins(BaseMixin) {
                     margin: 5,
                 },
                 axisLine: {
-                    show: true,
-                    lineStyle: {
-                        color: 'rgba(255, 255, 255, 0.12)',
-                    },
+                    show: true
                 },
             }, {
                 show: this.boolDisplayPwmAxis,
@@ -137,24 +132,19 @@ export default class TempChart extends Mixins(BaseMixin) {
                 nameLocation: 'end',
                 nameGap: 5,
                 nameTextStyle: {
-                    color: 'rgba(255, 255, 255, 0.24)',
                     align: 'right',
                 },
                 splitLine: {
                     show: false,
                 },
                 axisLabel: {
-                    color: 'rgba(255, 255, 255, 0.24)',
                     formatter: (value: number) => { return value * 100 },
                     showMinLabel: true,
                     rotate: 90,
                     margin: 5,
                 },
                 axisLine: {
-                    show: true,
-                    lineStyle: {
-                        color: 'rgba(255, 255, 255, 0.12)',
-                    },
+                    show: true
                 }
             }
         ],

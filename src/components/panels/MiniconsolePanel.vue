@@ -20,7 +20,7 @@
         <div class="d-flex flex-column">
             <v-card-text :class="consoleDirection === 'table' ? 'order-1' : 'order-2'">
                 <v-row>
-                    <v-col>
+                    <v-col color="accent" >
                         <v-textarea
                             v-model="gcode"
                             :items="items"
@@ -41,13 +41,14 @@
                             dense
                             append-icon="mdi-send"
                             @click:append="doSend"
+                            background-color="accent"
                         ></v-textarea>
                     </v-col>
                     <v-col class="col-auto">
                         <command-help-modal @onCommand="gcode = $event" ></command-help-modal>
                         <v-menu :offset-y="true" :close-on-content-click="false" :title="$t('Panels.MiniconsolePanel.SetupConsole')">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="px-2 minwidth-0" color="grey darken-3 ml-3" v-bind="attrs" v-on="on"><v-icon>mdi-filter</v-icon></v-btn>
+                                <v-btn class="px-2 minwidth-0" color="accent" v-bind="attrs" v-on="on"><v-icon>mdi-filter</v-icon></v-btn>
                             </template>
                             <v-list>
                                 <v-list-item class="minHeight36">

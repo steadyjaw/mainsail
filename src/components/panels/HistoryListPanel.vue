@@ -21,10 +21,10 @@
                         ></v-text-field>
                     </v-col>
                     <v-col class="offset-4 col-4 d-flex align-center justify-end">
-                        <v-btn :title="$t('History.TitleRefreshHistory')" color="grey darken-3" class="px-2 minwidth-0 ml-3" @click="refreshHistory"><v-icon>mdi-refresh</v-icon></v-btn>
+                        <v-btn :title="$t('History.TitleRefreshHistory')" color="accent" class="px-2 minwidth-0 ml-3" @click="refreshHistory"><v-icon>mdi-refresh</v-icon></v-btn>
                         <v-menu :offset-y="true" :close-on-content-click="false" title="Setup current list">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="px-2 minwidth-0 ml-3" color="grey darken-3" :title="$t('History.TitleSettings')" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
+                                <v-btn class="px-2 minwidth-0 ml-3" color="accent" :title="$t('History.TitleSettings')" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
                             </template>
                             <v-list>
                                 <template v-if="allPrintStatusArray.length">

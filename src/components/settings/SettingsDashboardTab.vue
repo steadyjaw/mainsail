@@ -8,25 +8,25 @@
             <v-row>
                 <v-col class="text-center">
                     <v-btn-toggle v-model="viewport" class="mx-auto">
-                        <v-btn value="mobile">
+                        <v-btn value="mobile" color="accent">
                             <span class="hidden-sm-and-down">{{ $t('Settings.DashboardTab.Mobile') }}</span>
                             <v-icon right class="hidden-sm-and-down">mdi-cellphone</v-icon>
                             <v-icon class="hidden-md-and-up">mdi-cellphone</v-icon>
                         </v-btn>
 
-                        <v-btn value="tablet">
+                        <v-btn value="tablet" color="accent">
                             <span class="hidden-sm-and-down">{{ $t('Settings.DashboardTab.Tablet') }}</span>
                             <v-icon right class="hidden-sm-and-down">mdi-tablet</v-icon>
                             <v-icon class="hidden-md-and-up">mdi-tablet</v-icon>
                         </v-btn>
 
-                        <v-btn value="desktop">
+                        <v-btn value="desktop" color="accent">
                             <span class="hidden-sm-and-down">{{ $t('Settings.DashboardTab.Desktop') }}</span>
                             <v-icon right class="hidden-sm-and-down">mdi-monitor-dashboard</v-icon>
                             <v-icon class="hidden-md-and-up">mdi-monitor-dashboard</v-icon>
                         </v-btn>
 
-                        <v-btn value="widescreen">
+                        <v-btn value="widescreen" color="accent">
                             <span class="hidden-sm-and-down">{{ $t('Settings.DashboardTab.Widescreen') }}</span>
                             <v-icon right class="hidden-sm-and-down">mdi-monitor-screenshot</v-icon>
                             <v-icon class="hidden-md-and-up">mdi-monitor-screenshot</v-icon>

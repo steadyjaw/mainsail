@@ -65,7 +65,7 @@ export default class Panel extends Mixins(BaseMixin) {
     @Prop({ required: true, default: '' }) readonly title!: string
     @Prop({ default: false }) readonly collapsible!: boolean
     @Prop({ required: true }) readonly cardClass!: string
-    @Prop({ default: '' }) readonly toolbarColor!: string
+    @Prop({ default: 'toolbar' }) readonly toolbarColor!: string
     @Prop({ default: '' }) readonly toolbarClass!: string
     @Prop({ default: false }) readonly loading!: boolean
     @Prop({ default: true }) readonly marginBottom!: boolean

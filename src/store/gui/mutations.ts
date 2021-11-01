@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import { getDefaultState } from './index'
 import {MutationTree} from 'vuex'
-import {GuiState, GuiStateMacrogroup, GuiStateMacrogroupMacros} from '@/store/gui/types'
+import {GuiState, GuiStateMacrogroup, GuiStateMacrogroupMacros, GuiStateTheme} from '@/store/gui/types'
 import { v4 as uuid } from 'uuid'
+import { ViewUpdate } from '@codemirror/view'
+import vuetify from '@/plugins/vuetify'
 
 export const mutations: MutationTree<GuiState> = {
     reset(state) {
@@ -236,5 +238,34 @@ export const mutations: MutationTree<GuiState> = {
         const layoutArray = [...state.dashboard[payload.layoutname]]
         layoutArray.splice(payload.index, 1)
         Vue.set(state.dashboard, payload.layoutname, layoutArray)
+    },
+
+    storeTheme(state, payload) {
+        const themes = [...state.theme.themes]
+        themes.push(payload)
+        Vue.set(state.theme, 'themes', themes)
+    },
+
+    applyTheme(state, payload) {
+        const theme = state.theme.themes.find((theme: GuiStateTheme) => theme.id === payload)
+        
+        Vue.set(vuetify.framework.theme, 'dark', theme.themeColors.darkMode)
+
+        // todo: Find better solution than looping 
+        Object.keys(vuetify.framework.theme.currentTheme).forEach((color: any) => {
+            Vue.delete(vuetify.framework.theme.currentTheme, color)
+        })
+        Object.keys(theme.themeColors.colors).forEach((color: any) => {
+            Vue.set(vuetify.framework.theme.currentTheme, color, theme.themeColors.colors[color])
+        })
+    },
+
+    getActiveTheme(state, payload) {
+        Vue.set(state.theme, 'active', payload)
+    },
+
+    setActiveTheme(state, payload) {
+        Vue.set(state.theme, 'active', payload)
     }
+
 }

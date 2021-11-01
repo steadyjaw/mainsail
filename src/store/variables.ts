@@ -1,6 +1,38 @@
 export const defaultLogoColor = '#D41216'
 export const defaultPrimaryColor = '#2196f3'
 
+export const themeTemplate = {
+    id: '',
+    name: '',
+    title: '',
+    description: '',
+    type: 'user',
+    themeColors: {
+        darkMode: true,
+        colors: {
+            primary: '#1976D2',
+            // secondary: '#424242',
+            // tertiary: '#134564',
+            // accent: '#82B1FF',
+            error: '#FF5252',
+            // info: '#2196F3',
+            success: '#4CAF50',
+            warning: '#FFC107',
+            toolbar: '#272727',
+            panel: '#1e1e1e',
+            logo: '#d41216',
+            background: '#121212',
+            // text: '#ffff00',
+            customColor1: '#123456',
+            customColor2: '#123456',
+            customColor3: '#123456',
+            customColor4: '#123456',
+            customColor5: '#123456',
+        }
+    }
+}
+
+
 export const colorArray = [
     '#F44336',
     '#8e379d',

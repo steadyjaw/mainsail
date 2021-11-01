@@ -9,7 +9,7 @@
         <template #activator="{ on, attrs }">
             <v-btn
                 class="gcode-command-btn px-2 minwidth-0"
-                color="grey darken-3"
+                color="accent"
                 :small="isMini"
                 v-bind="attrs"
                 v-on="on">

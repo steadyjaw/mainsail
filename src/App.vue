@@ -97,7 +97,7 @@ export default class App extends Mixins(BaseMixin) {
     }
 
     get logoColor(): string {
-        return this.$store.state.gui.theme.logo
+        return this.$vuetify?.theme?.currentTheme?.logo?.toString() ?? '#ff8300'
     }
 
     get primaryColor(): string {
@@ -106,6 +106,10 @@ export default class App extends Mixins(BaseMixin) {
 
     get warningColor(): string {
         return this.$vuetify?.theme?.currentTheme?.warning?.toString() ?? '#ff8300'
+    }
+
+    get backgroundColor(): string {
+        return this.$vuetify?.theme?.currentTheme?.background?.toString() ?? '#121212'
     }
 
     get primaryTextColor(): string {
@@ -127,11 +131,16 @@ export default class App extends Mixins(BaseMixin) {
             '--v-btn-text-primary': this.primaryTextColor,
             '--color-primary': this.primaryColor,
             '--color-warning': this.warningColor,
+            'background': this.backgroundColor
         }
     }
 
     get print_percent(): number {
         return Math.round(this.$store.getters['printer/getPrintPercent'] * 100)
+    }
+
+    get initActiveTheme() {
+        return this.$store.state.gui.theme.active
     }
 
     @Watch('language')
@@ -233,6 +242,10 @@ export default class App extends Mixins(BaseMixin) {
         }
     }
 
+    async initTheme() {
+        await this.$store.dispatch('gui/getActiveTheme')
+    }
+
     @Watch('customFavicons')
     customFaviconsChanged(): void {
         this.drawFavicon(this.print_percent)
@@ -253,8 +266,18 @@ export default class App extends Mixins(BaseMixin) {
         this.drawFavicon(this.print_percent)
     }
 
+    @Watch('initActiveTheme')
+    initializeTheme(){
+
+        this.$store.dispatch('gui/applyTheme', this.initActiveTheme)
+    }
+
     mounted(): void {
         this.drawFavicon(this.print_percent)
+    }
+
+    created(): void {
+        this.initTheme()
     }
 }
 </script>

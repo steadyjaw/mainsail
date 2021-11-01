@@ -59,3 +59,15 @@ export interface GuiStateMacrogroupMacros {
     showInPrinting: boolean
     showInPause: boolean
 }
+
+export interface GuiStateTheme {
+    id: string
+    name: string
+    title: string
+    description: string
+    type: string
+    themeColors: {
+        darkMode: boolean
+        colors: any
+    }
+}

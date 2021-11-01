@@ -37,7 +37,7 @@
                         </v-btn>
                         <v-menu :offset-y="true" :title="$t('Machine.ConfigFilesPanel.SetupCurrentList')">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="px-2 minwidth-0 ml-3" color="grey darken-3" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
+                                <v-btn class="px-2 minwidth-0 ml-3" color="accent" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
                             </template>
                             <v-list>
                                 <v-list-item class="minHeight36">
@@ -406,28 +406,28 @@ export default class ConfigFilesPanel extends Mixins(BaseMixin) {
         return [
             {
                 text: this.$t('Machine.ConfigFilesPanel.UploadFile'),
-                color: 'grey darken-3',
+                color: 'accent',
                 icon: 'mdi-file-upload',
                 loadingName: null,
                 onlyWriteable: true,
                 click: this.uploadFileButton
             }, {
                 text: this.$t('Machine.ConfigFilesPanel.CreateFile'),
-                color: 'grey darken-3',
+                color: 'accent',
                 icon: 'mdi-file-plus',
                 loadingName: null,
                 onlyWriteable: true,
                 click: this.createFile
             }, {
                 text: this.$t('Machine.ConfigFilesPanel.CreateDirectory'),
-                color: 'grey darken-3',
+                color: 'accent',
                 icon: 'mdi-folder-plus',
                 loadingName: null,
                 onlyWriteable: true,
                 click: this.createDirecotry
             }, {
                 text: this.$t('Machine.ConfigFilesPanel.RefreshDirectory'),
-                color: 'grey darken-3',
+                color: 'accent',
                 icon: 'mdi-refresh',
                 loadingName: null,
                 onlyWriteable: false,
