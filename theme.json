@@ -1,0 +1,136 @@
+{
+    "namespace": "mainsail",
+    "key": "theme",
+    "value": {
+        "active": "c76d85ac-e9dd-4d1a-9b39-88331a98c94d",
+        "logo": "#D41216",
+        "primary": "#2196f3",
+        "themes": [
+            {
+                "description": "Mainsails Default theme",
+                "id": "mainsail-default-theme",
+                "name": "mainsail",
+                "themeColors": {
+                    "colors": {
+                        "accent": "#424242",
+                        "background": "#121212",
+                        "error": "#FF5252",
+                        "info": "#2196F3",
+                        "logo": "#D41216",
+                        "panel": "#1E1E1E",
+                        "primary": "#2196F3",
+                        "secondary": "#424242",
+                        "success": "#4CAF50",
+                        "tertiary": "#134564",
+                        "text": "#FFFFFF",
+                        "toolbar": "#272727",
+                        "warning": "#FB8C00"
+                    },
+                    "darkMode": true
+                },
+                "title": "Mainsail",
+                "type": "default"
+            },
+            {
+                "description": "DRACULA Theme",
+                "id": "b3f6585a-916d-413a-b29d-6ae22f61c13e",
+                "name": "dracula",
+                "themeColors": {
+                    "colors": {
+                        "accent": "#282A36",
+                        "background": "#282A36",
+                        "error": "#FF5555",
+                        "info": "#2196F3",
+                        "logo": "#BD93F9",
+                        "panel": "#282A36",
+                        "primary": "#BD93F9",
+                        "secondary": "#44475A",
+                        "success": "#50FA7B",
+                        "tertiary": "#134564",
+                        "text": "#F8F8F2",
+                        "toolbar": "#44475A",
+                        "warning": "#FFB86C"
+                    },
+                    "darkMode": true
+                },
+                "title": "Dracula",
+                "type": "community"
+            },
+            {
+                "description": "DooM",
+                "id": "0ab2a794-af1c-426f-b5ff-1cd21dbb0fde",
+                "name": "",
+                "themeColors": {
+                    "colors": {
+                        "accent": "#726372",
+                        "background": "#FFE5E5",
+                        "error": "#FF5252",
+                        "info": "#2196F3",
+                        "logo": "#FF00D6",
+                        "panel": "#FFFFFF",
+                        "primary": "#17D833",
+                        "secondary": "#424242",
+                        "success": "#4CAF50",
+                        "tertiary": "#134564",
+                        "text": "#000000",
+                        "toolbar": "#81CA91",
+                        "warning": "#FF8000"
+                    },
+                    "darkMode": false
+                },
+                "title": "Hurt me plenty",
+                "type": "user"
+            },
+            {
+                "description": "md light",
+                "id": "0a34a74d-982e-4fd6-b266-7008d8ce5210",
+                "name": "",
+                "themeColors": {
+                    "colors": {
+                        "background": "#FFFFFF",
+                        "customColor1": "#123456",
+                        "customColor2": "#123456",
+                        "customColor3": "#123456",
+                        "customColor4": "#123456",
+                        "customColor5": "#123456",
+                        "error": "#FF5252",
+                        "logo": "#d41216",
+                        "panel": "#FFFFFF",
+                        "primary": "#1976D2",
+                        "success": "#4CAF50",
+                        "toolbar": "#E0E0E0",
+                        "warning": "#FFC107"
+                    },
+                    "darkMode": false
+                },
+                "title": "Light Mode",
+                "type": "user"
+            },
+            {
+                "description": "",
+                "id": "c76d85ac-e9dd-4d1a-9b39-88331a98c94d",
+                "name": "",
+                "themeColors": {
+                    "colors": {
+                        "background": "#121212",
+                        "customColor1": "#123456",
+                        "customColor2": "#123456",
+                        "customColor3": "#123456",
+                        "customColor4": "#123456",
+                        "customColor5": "#123456",
+                        "error": "#FF5252",
+                        "logo": "#d41216",
+                        "panel": "#1e1e1e",
+                        "primary": "#1976D2",
+                        "success": "#4CAF50",
+                        "toolbar": "#272727",
+                        "warning": "#FFC107"
+                    },
+                    "darkMode": true
+                },
+                "title": "Dunkel",
+                "type": "user"
+            }
+        ]
+    }
+}
