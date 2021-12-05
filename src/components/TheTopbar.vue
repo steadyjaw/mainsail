@@ -19,8 +19,19 @@
 
 <template>
     <div>
+<<<<<<< Updated upstream
         <v-app-bar app elevate-on-scroll :height="topbarHeight" class="topbar pa-0" clipped-left>
             <v-app-bar-nav-icon tile @click.stop="naviDrawer = !naviDrawer"></v-app-bar-nav-icon>
+=======
+<<<<<<< Updated upstream
+        <v-app-bar app elevate-on-scroll height="48px" clipped-left>
+            <v-app-bar-nav-icon @click.stop="naviDrawer = !naviDrawer"></v-app-bar-nav-icon>
+=======
+        <v-app-bar app elevate-on-scroll :height="topbarHeight" class="topbar pa-0" clipped-left>
+            <v-app-bar-nav-icon tile @click.stop="clickNaviIcon"></v-app-bar-nav-icon>
+            <!-- <v-app-bar-nav-icon tile @click.stop="naviDrawer = !naviDrawer"></v-app-bar-nav-icon> -->
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             <router-link to="/">
                 <template v-if="sidebarLogo">
                     <img :src="sidebarLogo" style="height: 32px;" class="nav-logo ml-4 mr-1 d-none d-sm-flex" alt="Logo" />
@@ -174,8 +185,20 @@ export default class TheTopbar extends Mixins(BaseMixin) {
         return this.$store.state.naviDrawer
     }
 
-    set naviDrawer(newVal) {
-        this.$store.dispatch('setNaviDrawer', newVal)
+    set naviDrawer(newVal: boolean) {
+        if(this.$vuetify.breakpoint.mobile){
+            this.$store.dispatch('setNaviDrawer', newVal)
+        } else {
+            this.$store.dispatch('setNaviDrawer', true)
+        }
+    }
+
+    get naviMini() {
+        return this.$store.state.naviMini ?? true
+    }
+
+    set naviMini(newVal) {
+        this.$store.dispatch('setNaviMini', newVal)
     }
 
     get validGcodeExtensions() {
@@ -310,6 +333,11 @@ export default class TheTopbar extends Mixins(BaseMixin) {
     cancelUpload(): void {
         this.uploadSnackbar.cancelTokenSource.cancel()
         this.uploadSnackbar.status = false
+    }
+
+    clickNaviIcon(): void {
+        this.naviDrawer = !this.naviDrawer
+        this.naviMini = !this.naviMini
     }
 }
 </script>

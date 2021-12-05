@@ -27,16 +27,68 @@
         text-transform: uppercase;
         opacity: .85;
     }
+    a.nav-logo, a.nav-logo.active-nav-item, a.nav-logo.active-nav-item::before {
+        border: 0;
+        text-decoration: none;
+        background-color: transparent;
+    }
+    a.nav-logo:hover::before {
+        opacity: 0;
+    }
 </style>
 
 <template>
+<<<<<<< Updated upstream
     <v-navigation-drawer v-model="naviDrawer" :src="sidebarBackground" :mini-variant="(navigationStyle === 'iconsOnly')" :key="navigationStyle" :width="navigationWidth" clipped app> 
+=======
+<<<<<<< Updated upstream
+    <v-navigation-drawer v-model="naviDrawer" :src="sidebarBackground" :mini-variant="(navigationStyle === 'iconsOnly')" :key="navigationStyle" width="220px" clipped app> 
+=======
+    <!-- <v-navigation-drawer 
+        :value="true"
+        :src="sidebarBackground" 
+        :key="$vuetify.breakpoint.mobile + isTouchDevice" 
+        :width="navigationWidth" 
+        :mini-variant="naviMini" 
+        :stateless="naviStateless" 
+        :hide-overlay="naviStateless" 
+        clipped
+        app
+    > -->
+        <!-- :style="!naviDrawer ? 'top: ' + $vuetify.application.top + 'px;max-height: calc(100% - 48px);': ''"  -->
+        <!-- :style="`margin-top: ${$vuetify.application.top}px`">  -->
+    <!-- <v-navigation-drawer v-model="naviDrawer" :src="sidebarBackground" :mini-variant="(navigationStyle === 'iconsOnly')" :key="navigationStyle" :width="navigationWidth" clipped app>  -->
+    <v-navigation-drawer
+        v-model="naviDrawer"
+        :src="sidebarBackground"
+        :mini-variant.sync="naviMini"
+        :width="navigationWidth"
+        clipped
+        app
+    > 
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         <v-list class="pr-0 pt-0 ml-0">
             <v-list-item-group active-class="active-nav-item">
+                <template v-if="$vuetify.breakpoint.mobile">
+                    <v-list-item 
+                        router to="/"
+                        class="small-list-item align-center justify-center no-text-decoration nav-logo"
+                        :ripple="false"
+                    >
+                        <template v-if="sidebarLogo">
+                            <img :src="sidebarLogo" style="height: 32px;" class="nav-logo d-none d-sm-flex" alt="Logo" />
+                        </template>
+                        <template v-else>
+                            <mainsail-logo :color="logoColor" style="height: 32px;" class="nav-logo" router to="/" :ripple="false"></mainsail-logo>
+                        </template>
+                    </v-list-item>
+                </template>
                 <template v-if="countPrinters">
+                    <v-divider class="my-1 d-block d-sm-none"></v-divider>
                     <v-list-item 
                         router to="/allPrinters"
-                        class="small-list-item mt-1"
+                        class="small-list-item"
                     >
                         <v-list-item-icon class="my-3 mr-3 menu-item-icon">
                             <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -53,6 +105,7 @@
                         router :to="category.path"
                         v-if="showInNavi(category)"
                         class="small-list-item"
+                        @click.stop="naviMini ? naviMini = naviMini : naviMini = !naviMini"
                     >
                         <v-list-item-icon class="my-3 mr-3 menu-item-icon">
                             <v-icon>mdi-{{ category.icon }}</v-icon>
@@ -82,12 +135,21 @@ import BaseMixin from '@/components/mixins/base'
 import {PrinterStateKlipperConfig} from '@/store/printer/types'
 import TheSelectPrinterDialog from '@/components/TheSelectPrinterDialog.vue'
 import AboutModal from '@/components/modals/AboutModal.vue'
+<<<<<<< Updated upstream
 import {navigationWidth} from '@/store/variables'
+=======
+<<<<<<< Updated upstream
+=======
+import {navigationWidth} from '@/store/variables'
+import MainsailLogo from '@/components/ui/MainsailLogo.vue'
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 @Component({
     components: {
         TheSelectPrinterDialog,
-        AboutModal
+        AboutModal,
+        MainsailLogo
     }
 })
 
@@ -99,7 +161,33 @@ export default class TheSidebarAlt extends Mixins(BaseMixin) {
     }
 
     set naviDrawer(newVal: boolean) {
-        this.$store.dispatch('setNaviDrawer', newVal)
+        if(this.$vuetify.breakpoint.mobile){
+            this.$store.dispatch('setNaviDrawer', newVal)
+        } else {
+            this.$store.dispatch('setNaviDrawer', true)
+        }
+    }
+
+    get naviMini(): boolean {
+        return this.$store.state.naviMini ?? true
+    }
+    
+    set naviMini(newVal) {
+        this.$store.dispatch('setNaviMini', newVal)
+    }
+
+    get naviTemp(): boolean {
+        if(this.$vuetify.breakpoint.mobile){
+            return false
+        } else {
+            return !this.naviMini
+        }
+    }
+
+    set naviTemp(newVal: boolean) {
+        if(!newVal) {
+            this.naviMini = true
+        }
     }
 
     get navigationStyle() {
@@ -146,6 +234,10 @@ export default class TheSidebarAlt extends Mixins(BaseMixin) {
         return this.$store.getters['farm/countPrinters']
     }
 
+    get logoColor(): string {
+        return this.$store.state.gui.theme.logo
+    }
+
     showInNavi(route: AppRoute): boolean {
         if (['shutdown', 'error', 'disconnected'].includes(this.klippy_state) && !route.alwaysShow) return false
 
@@ -158,6 +250,13 @@ export default class TheSidebarAlt extends Mixins(BaseMixin) {
         return true
     }
 
+    clickNaviItem() {
+        if(this.isTouchDevice && !this.$vuetify.breakpoint.mobile && this.naviDrawer){
+            this.naviDrawer = true
+        } else if(this.$vuetify.breakpoint.mobile && this.naviDrawer) {
+            this.naviDrawer = false
+        }
+    }
     mounted() {
         this.naviDrawer = this.$vuetify.breakpoint.lgAndUp
     }

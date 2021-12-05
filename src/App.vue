@@ -143,11 +143,22 @@ export default class App extends Mixins(BaseMixin) {
         return {
             '--v-btn-text-primary': this.primaryTextColor,
             '--color-primary': this.primaryColor,
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            '--color-warning': this.warningColor
+=======
+>>>>>>> Stashed changes
             '--color-warning': this.warningColor,
             '--panel-toolbar-icon-btn-width': panelToolbarHeight + 'px',
             '--panel-toolbar-text-btn-height': panelToolbarHeight + 'px',
             '--topbar-icon-btn-width': topbarHeight + 'px',
+<<<<<<< Updated upstream
             '--sidebar-menu-item-height': navigationItemHeight + 'px'
+=======
+            '--sidebar-menu-item-height': navigationItemHeight + 'px',
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         }
     }
 

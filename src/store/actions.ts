@@ -29,4 +29,8 @@ export const actions: ActionTree<RootState, RootState> = {
     setNaviDrawer({ commit }, payload) {
         commit('setNaviDrawer', payload)
     },
+
+    setNaviMini({ commit }, payload) {
+        commit('setNaviMini', payload)
+    },
 }
