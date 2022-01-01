@@ -110,12 +110,25 @@
                     </v-col>
                     <v-col class="d-flex justify-center align-content-space-around ">
                         <template v-if="loadedFile === null">
-                            <v-btn @click="loadCurrentFile" class="mr-3" v-if="sdCardFilePath !== '' && sdCardFilePath !== loadedFile">{{ $t("GCodeViewer.LoadCurrentFile")}}</v-btn>
-                            <v-btn @click="chooseFile">{{ $t("GCodeViewer.LoadLocal") }}</v-btn>
+                            <v-btn @click="loadCurrentFile" class="mr-3" v-if="sdCardFilePath !== '' && sdCardFilePath !== loadedFile" >
+                                <v-icon class="d-flex d-sm-none">mdi-file-move</v-icon>
+                                <span class="d-none d-sm-flex">{{ $t("GCodeViewer.LoadCurrentFile")}}</span>
+                            </v-btn>
+                            <v-btn @click="chooseFile">
+                                <v-icon class="d-flex d-sm-none">mdi-file-upload</v-icon>
+                                <span>{{ $t("GCodeViewer.LoadLocal") }}</span>
+                            </v-btn>
                         </template>
                         <template v-else>
-                            <v-btn @click="tracking=!tracking" v-if="showTrackingButton" class="mr-3"><v-icon v-html="tracking ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off-outline'" class="mr-2"></v-icon>{{ $t("GCodeViewer.Tracking") }}</v-btn>
-                            <v-btn @click="clearLoadedFile">{{ $t("GCodeViewer.ClearLoadedFile") }}</v-btn>
+                            <v-btn @click="tracking=!tracking" v-if="showTrackingButton" class="px-2 px-sm-4 mr-3">
+                                <v-icon v-html="tracking ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off-outline'" class="mr-2"></v-icon>
+                                <v-icon class="d-flex d-sm-none">mdi-selection-marker</v-icon>
+                                <span class="d-none d-sm-flex">{{ $t("GCodeViewer.Tracking") }}</span>
+                            </v-btn>
+                            <v-btn @click="clearLoadedFile" class="px-2 px-sm-4 minwidth-0">
+                                <v-icon class="d-flex d-sm-none">mdi-broom</v-icon>
+                                <span class="d-none d-sm-flex">{{ $t("GCodeViewer.ClearLoadedFile") }}</span>
+                            </v-btn>
                         </template>
                     </v-col>
                     <v-col>
