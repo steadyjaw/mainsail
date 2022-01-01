@@ -54,6 +54,38 @@
                     <v-icon class="d-sm-none">mdi-reload-alert</v-icon>
                 </v-btn>
                 <v-btn icon tile @click="resetCamera"><v-icon>mdi-camera-retake</v-icon></v-btn>
+                <v-menu :offset-y="true"  bottom :close-on-content-click="false" :title="$t('Files.SetupCurrentList')">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn icon tile class="minwidth-0 px-2" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
+                    </template>
+                    <v-list>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="showCursor"  :label="$t('GCodeViewer.ShowToolhead')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="showTravelMoves"  :label="$t('GCodeViewer.ShowTravelMoves')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36" v-if="loadedFile === sdCardFilePath && printing_objects.length > 1">
+                            <v-checkbox class="mt-0" hide-details v-model="showObjectSelection"  :label="$t('GCodeViewer.ShowObjectSelection')"></v-checkbox>
+                        </v-list-item>
+                        <v-divider></v-divider>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="hdRendering" :label="$t('GCodeViewer.HDRendering')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="forceLineRendering" :label="$t('GCodeViewer.ForceLineRendering')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="transparency" :label="$t('GCodeViewer.Transparency')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="voxelMode" :label="$t('GCodeViewer.VoxelMode')"></v-checkbox>
+                        </v-list-item>
+                        <v-list-item class="minHeight36">
+                            <v-checkbox class="mt-0" hide-details v-model="specularLighting" :label="$t('GCodeViewer.SpecularLighting')"></v-checkbox>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
             </template>
             <v-card-text>
                 <v-row>
@@ -74,9 +106,9 @@
                 </v-row>
                 <v-row class="mt-0">
                     <v-col>
-                        <v-select :items="colorModes" :label="$t('GCodeViewer.ColorMode')" item-text="text" dense v-model="colorMode" hide-details outlined attach></v-select>
+                        <v-select top :items="colorModes" :label="$t('GCodeViewer.ColorMode')" item-text="text" dense v-model="colorMode" hide-details outlined></v-select>
                     </v-col>
-                    <v-col class="text-center">
+                    <v-col class="d-flex justify-center align-content-space-around ">
                         <template v-if="loadedFile === null">
                             <v-btn @click="loadCurrentFile" class="mr-3" v-if="sdCardFilePath !== '' && sdCardFilePath !== loadedFile">{{ $t("GCodeViewer.LoadCurrentFile")}}</v-btn>
                             <v-btn @click="chooseFile">{{ $t("GCodeViewer.LoadLocal") }}</v-btn>
@@ -87,45 +119,7 @@
                         </template>
                     </v-col>
                     <v-col>
-                        <v-row>
-                            <v-col>
-                                <v-select :items="renderQualities" :label="$t('GCodeViewer.RenderQuality')" item-text="label" dense v-model="renderQuality" hide-details outlined attach></v-select>
-                            </v-col>
-                            <v-col class="col-auto">
-                                <v-menu :offset-y="true" :offset-x="true" top :close-on-content-click="false" :title="$t('Files.SetupCurrentList')">
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn class="minwidth-0 px-2" v-bind="attrs" v-on="on"><v-icon>mdi-cog</v-icon></v-btn>
-                                    </template>
-                                    <v-list>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="showCursor"  :label="$t('GCodeViewer.ShowToolhead')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="showTravelMoves"  :label="$t('GCodeViewer.ShowTravelMoves')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36" v-if="loadedFile === sdCardFilePath && printing_objects.length > 1">
-                                            <v-checkbox class="mt-0" hide-details v-model="showObjectSelection"  :label="$t('GCodeViewer.ShowObjectSelection')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-divider></v-divider>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="hdRendering" :label="$t('GCodeViewer.HDRendering')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="forceLineRendering" :label="$t('GCodeViewer.ForceLineRendering')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="transparency" :label="$t('GCodeViewer.Transparency')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="voxelMode" :label="$t('GCodeViewer.VoxelMode')"></v-checkbox>
-                                        </v-list-item>
-                                        <v-list-item class="minHeight36">
-                                            <v-checkbox class="mt-0" hide-details v-model="specularLighting" :label="$t('GCodeViewer.SpecularLighting')"></v-checkbox>
-                                        </v-list-item>
-                                    </v-list>
-                                </v-menu>
-                            </v-col>
-                        </v-row>
+                        <v-select :items="renderQualities" :label="$t('GCodeViewer.RenderQuality')" item-text="label" dense v-model="renderQuality" hide-details outlined ></v-select>
                     </v-col>
                 </v-row>
                 <input :accept="'.g,.gcode,.gc,.gco,.nc,.ngc,.tap'" @change="fileSelected" hidden multiple ref="fileInput" type="file" />
@@ -858,6 +852,15 @@ export default class Viewer extends Mixins(BaseMixin) {
 
     updateZSlider(newVal: any) {
         this.zSlider = newVal
+    }
+
+    get breakpoint() {
+        return this.$vuetify.breakpoint.name
+    }
+
+    @Watch('breakpoint')
+    reloadCanvas(): void{
+        this.reloadViewer()
     }
 }
 </script>
