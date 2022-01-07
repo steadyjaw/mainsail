@@ -58,7 +58,7 @@
                             <v-combobox
                                 v-model="stepsAll"
                                 hide-selected
-                                hide-details
+                                hide-details="auto"
                                 multiple
                                 small-chips
                                 :deletable-chips="true"
@@ -66,12 +66,16 @@
                                 type="number"
                                 :rules="[
                                     v => v.length > 0 || 'Minimum 1 value',
-                                    v => v.length < 9 || 'For narrow screens it is recommended to enter max. 3 values.',
+                                    v => v.length < 9 || 'Max. 3 values Recommended',
                                 ]"
                                 dense
                                 outlined
                                 hide-spin-buttons
-                            ></v-combobox>
+                            >
+                                <template #selection="{ parent, item, index }">
+                                    <v-chip label outlined pill close small @click:close="parent.value.splice(index, 1)" :color="parent.value.filter((element) => element == item).length > 1 ? 'warning' : ''" class="text--secondary">{{item}}</v-chip>
+                                </template>
+                            </v-combobox>
                         </settings-row>
                         <v-divider class="my-2"></v-divider>
                     </template>
@@ -93,7 +97,11 @@
                                 dense
                                 outlined
                                 hide-spin-buttons
-                            ></v-combobox>
+                            >
+                                <template #selection="{ item, index }">
+                                    <v-chip label outlined close small @click:close="stepsCircleXY.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                                </template>
+                            </v-combobox>
                         </settings-row>
                         <v-divider class="my-2"></v-divider>
                         <settings-row :title="$t('Settings.ControlTab.MoveDistancesZInMm')" :mobile-second-row="true">
@@ -113,7 +121,11 @@
                                 dense
                                 outlined
                                 hide-spin-buttons
-                            ></v-combobox>
+                            >
+                                <template #selection="{ item, index }">
+                                    <v-chip label outlined close small @click:close="stepsCircleZ.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                                </template>
+                            </v-combobox>
                         </settings-row>
                         <v-divider class="my-2"></v-divider>
                     </template>
@@ -135,7 +147,11 @@
                                 dense
                                 outlined
                                 hide-spin-buttons
-                            ></v-combobox>
+                            >
+                                <template #selection="{ item, index }">
+                                    <v-chip label outlined close small @click:close="stepsXY.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                                </template>
+                            </v-combobox>
                         </settings-row>
                         <v-divider class="my-2"></v-divider>
                         <settings-row :title="$t('Settings.ControlTab.MoveDistancesZInMm')" :mobile-second-row="true">
@@ -155,7 +171,11 @@
                                 dense
                                 outlined
                                 hide-spin-buttons
-                            ></v-combobox>
+                            >
+                                <template #selection="{ item, index }">
+                                    <v-chip label outlined close small @click:close="stepsZ.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                                </template>
+                            </v-combobox>
                         </settings-row>
                         <v-divider class="my-2"></v-divider>
                     </template>
@@ -176,7 +196,11 @@
                             dense
                             outlined
                             hide-spin-buttons
-                        ></v-combobox>
+                        >
+                            <template #selection="{ item, index }">
+                                <v-chip label outlined close small @click:close="feedamountsE.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                            </template>
+                        </v-combobox>
                     </settings-row>
                     <v-divider class="my-2"></v-divider>
                     <settings-row :title="$t('Settings.ControlTab.SpeedEInMms')" :mobile-second-row="true">
@@ -196,7 +220,11 @@
                             dense
                             outlined
                             hide-spin-buttons
-                        ></v-combobox>
+                        >
+                            <template #selection="{ item, index }">
+                                <v-chip label outlined close small @click:close="feedratesE.splice(index, 1)" class="text--secondary">{{item}}</v-chip>
+                            </template>
+                        </v-combobox>
                     </settings-row>
                 </v-form>
             </v-card-text>
